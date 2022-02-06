@@ -171,27 +171,41 @@ function todosIguales(arreglo) {
   //retornar true, caso contrario retornar false.
   //Escribe tu código aquí  
   let counter = 0;
-  for(item in arreglo){
-    if(arreglo[item-1] === arreglo[item]){
-      return true
-    }
+  for(let i = 0; i <= arreglo.length; i++){
+    let actual = arreglo[i];
+    let siguiente = arreglo[i+1];
+    if(actual === siguiente) counter++;
   }
+  return counter === arreglo.length ? true : false
 } 
-
-console.log(todosIguales([0,1,1,7]))
 
 function mesesDelAño(array) {
   //Dado un array que contiene algunos meses del año desordenados, recorrer el array buscando los meses de 
   // "Enero", "Marzo" y "Noviembre", guardarlo en nuevo array y retornarlo.
   //Si alguno de los meses no está, devolver: "No se encontraron los meses pedidos"
   // Tu código:
-}
+  let meses = [];
+  for(mes in array){
+    let month = array[mes];
+    if(month === 'Enero' || month === 'Marzo' || month === 'Noviembre'){
+      meses.push(month);
+    }
+  }
 
+  return meses.length < 3 ? "No se encontraron los meses pedidos" : meses;
+}
 
 function mayorACien(array) {
   //La función recibe un array con enteros entre 0 y 200. Recorrer el array y guardar en un nuevo array sólo los
   //valores mayores a 100 (no incluye el 100). Finalmente devolver el nuevo array.
   // Tu código:
+  let numeros = [];
+  for(num in array){
+    if(array[num] > 100){
+      numeros.push(array[num]);
+    }
+  }
+  return numeros;
 }
 
 
@@ -203,14 +217,16 @@ function breakStatement(numero) {
   //devolver: "Se interrumpió la ejecución"
   //Pista: usá el statement 'break'
   // Tu código:
-  let numeros = [];
+  let numeros = [], iteraciones = 0, continuar = true;
   for(let count=0; count<10; count++){
     numeros.push(numero+=2);
-    if(count === agregarNumeros(numeros)){
-      break
+    iteraciones += count; 
+    if(iteraciones === agregarNumeros(numeros)){
+      continuar = false;
+      break;
     }
   }
-  return numeros
+  return continuar ? numeros : "Se interrumpió la ejecución";
 }
 
 function continueStatement(numero) {
@@ -220,8 +236,7 @@ function continueStatement(numero) {
   //Cuando el número de iteraciones alcance el valor 5, no se suma en ese caso y se continua con la siguiente iteración
   //Pista: usá el statement 'continue'
   // Tu código:
-  let numeros = [];
-  let count = 0;
+  let numeros = [], count = 0;
   for(count; count<10; count++){
     if(count ===5){
       continue
